@@ -1,0 +1,19 @@
+/* @import 'bootstrap/bootstrap'; */
+@import 'my_bootstrap/bootstrap';
+
+
+/*http://neat.bourbon.io/*/
+/* @import 'neat/_neat'; */
+
+$font-stack: 'Noto Sans', sans-serif;
+$primary-color: #15263e;
+
+$grid-width: 1%;
+$gutter-width: 10px;
+
+@import 'my_mixins_';
+@import 'devmode_';
+
+@import 'top';
+@import 'navigation';
+@import 'banner'

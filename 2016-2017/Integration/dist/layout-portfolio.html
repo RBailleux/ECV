@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>template</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="/css/icons.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="/js/bundle.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-6">
+              <ul class="filter-nav">
+                <li class="filter-nav__nav-entry filter-nav__nav-entry--active"><a data-filter="*" href="">All</a></li>
+                <li class="filter-nav__nav-entry"><a data-filter=".psd-design" href="">PSD Design</a></li>
+                <li class="filter-nav__nav-entry"><a data-filter=".presentation" href="">Presentation</a></li>
+                <li class="filter-nav__nav-entry"><a data-filter=".work-ideas" href="">Work ideas</a></li>
+                <li class="filter-nav__nav-entry"><a data-filter=".mockup" href="">Mockup</a></li>
+                <li class="filter-nav__nav-entry"><a data-filter=".logo" href="">Logo</a></li>
+                <li class="filter-nav__nav-entry"><a data-filter=".icons" href="">Icons</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row grid">
+            <div data-category="psd-design" class="col-md-6 grid-item psd-design">a </div>
+            <div class="col-md-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+/*
+https://www.minimamente.com/example/gradient-generator/
+*/
+
+
+@function grid-width($n) {
+    @if $n == 'wide' {
+      @return 94 * $grid-width;
+    }
+    @if $n == 'half' {
+      @return 50 * $grid-width;
+    }
+    @if $n == 'side' {
+      @return 30 * $grid-width;
+    }
+     @if $n == 'sidetwo' {
+      @return 62 * $grid-width;
+    }
+    @if $n == 'full' {
+      @return 100 * $grid-width;
+    }
+}
+
+@for $i from 1 through 10 {
+    .col-#{$i} {
+        width: 10*$i * $grid-width;
+    }
+    @media screen and (max-width: 720px) {
+        .col-#{$i} {
+            width: 100 * $grid-width;
+        }
+    }
+}
+
+
+.col{
+    float:left;
+    padding:1%;
+    box-sizing: border-box;
+    margin:2% auto;
+}
+
+.col-wide{
+    background:red;
+    width:grid-width('wide');
+    margin: 0% auto;
+}
+.col-side{
+     width:grid-width('side');
+     margin-right:2%;
+}
+.col-sidetwo{
+    width:grid-width('sidetwo');
+    margin-right:2%;
+}
+.col-full{
+    width:grid-width('full');
+}
+
+
+
+
+@mixin linear-gradient($image1, $pattern, $deg, $start, $end, $opstart, $opend) {
+    background-image:
+    url($image1),
+    linear-gradient($deg,
+      rgba($start, $opstart) 0%,
+      rgba($end, $opend) 100%
+    ),
+    url($pattern);
+    background-repeat:no-repeat, no-repeat, no-repeat;
+    background-position:0 bottom, 0 0, 0 0;
+    background-size: 20%, auto, auto;
+}
