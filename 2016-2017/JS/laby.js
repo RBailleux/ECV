@@ -1,4 +1,4 @@
-// RÃ©solution de labyrinthe
+// Résolution de labyrinthe
 
 // labyrinthe
 // +---+---+---+
@@ -25,7 +25,7 @@ MATRIX = [
   [0, 0, 0, 0, 0, 1, 0, 0, 0]  // K
 ]
 
-COLUMN_NAMES = ['A', 'B', 'C', 'E', 'F', 'G', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+COLUMN_NAMES = ['A', 'B', 'C', 'E', 'F', 'G', 'I', 'J', 'K']
 
 function subSet (index, length, getValue) {
   var result
@@ -60,7 +60,7 @@ function subMatrix (m, index) {
 // columnNames : nom des colonnes
 // path : ""
 function getPath (target, origin, matrix, columnNames, path) {
-  if (origin === target) { // j'ai trouvÃ©
+  if (origin === target) { // j'ai trouvé
     return path
   } else {
     var iOrigin, newMatrix, newColnames
@@ -71,10 +71,7 @@ function getPath (target, origin, matrix, columnNames, path) {
       hasArc = matrix[iOrigin][columnNames.indexOf(newColnames[i])]
       if (hasArc) {
         newMatrix = subMatrix(matrix, iOrigin)
-        var newPath
-        newPath = path
-        path.push(newColnames[i])
-        var res = getPath(target, newColnames[i], newMatrix, newColnames, newPath)
+        var res = getPath(target, newColnames[i], newMatrix, newColnames, path.concat([newColnames[i]]))
         if (res) {
           return res
         }
@@ -86,28 +83,33 @@ function getPath (target, origin, matrix, columnNames, path) {
   return path
 }
 
-function Graph(matrix, vertexName){
+// console.log(getPath('K', 'A', MATRIX, COLUMN_NAMES, 'A'))
+console.log('getPath:', getPath('I', 'C', MATRIX, COLUMN_NAMES, ['C']))
+
+function Graph (matrix, vertexNames) {
   this.matrix = matrix
-  this.vertexName = vertexName
+  this.vertexNames = vertexNames
 }
 
-Graph.prototype.getPath = function (origin, target){
-  return getPath(target, origin, this.matrix, this.vertexName, [origin])
+Graph.prototype.getPath = function (origin, target) {
+  return getPath(target, origin, this.matrix, this.vertexNames, [origin])
 }
+
+var g = new Graph(MATRIX, COLUMN_NAMES)
+console.log('Graph#getPath:', g.getPath('C', 'I'))
 
 function getNullMatrix (width, height) {
-  var nullLines = []
   var nullMatrix = []
   for (var i = 0; i < width; i++) {
-    nullLines.push(0)
-  }
-  for (i = 0; i < height; i++) {
-    nullMatrix.push(nullLines)
+	nullMatrix[i] = []
+    for (var j = 0; j < height; j++) {
+      nullMatrix[i][j] = 0
+    }
   }
   return nullMatrix
 }
 
-console.log(getNullMatrix(3, 4))
+console.log('getNullMatrix:', getNullMatrix(3, 2))
 
 function Labyrinthe (width, height) {
   this.width = width
@@ -126,17 +128,57 @@ Labyrinthe.prototype.cellList = function () {
   return cells
 }
 
+var labyrinthe = new Labyrinthe(3, 3)
+console.log('Labyrinthe#cellList:', labyrinthe.cellList())
+
 Labyrinthe.prototype.cellIndex = function (name) {
   return this.cells.indexOf(name)
 }
 
-var labyrinthe
-labyrinthe = new Labyrinthe(3, 3)
-console.log(labyrinthe.cells)
-console.log(labyrinthe.cellIndex('A1'))
+console.log('Labyrinthe#cellIndex:', labyrinthe.cellIndex('B2'))
 
-//var Graph
-//graph = new Graph(MATRIX, COLUMN_NAMES)
+Labyrinthe.prototype.cellOpen = function (cellName, direction) {
+	x = COLUMN_NAMES.indexOf(cellName.substr(0,1))
+	y = cellName.substr(1)
+	openX = (y-1)*this.width+x
+	switch(direction) {
+		case 'bottom':
+			openY = y*this.width+x
+			this.matrix[openX][openY] = 1
+			this.matrix[openY][openX] = 1
+			break;
+		case 'right':
+			openY = openX+1
+			this.matrix[openX][openY] = 1
+			this.matrix[openY][openX] = 1
+			break;
+	}
+}
 
-// console.log(getPath('K', 'A', MATRIX, COLUMN_NAMES, 'A'))
-//console.log(getPath('I', 'C', MATRIX, COLUMN_NAMES, 'C'))
+labyrinthe.cellOpen('A1', 'bottom') // vers A2
+labyrinthe.cellOpen('B1', 'bottom') // vers B2
+labyrinthe.cellOpen('B1', 'right')  // vers C1
+labyrinthe.cellOpen('A2', 'bottom') // vers A3
+labyrinthe.cellOpen('A2', 'right')  // vers B2
+labyrinthe.cellOpen('B2', 'bottom') // vers B3
+labyrinthe.cellOpen('B2', 'right')  // vers C2
+labyrinthe.cellOpen('C2', 'bottom') // vers C3
+labyrinthe.cellOpen('A3', 'right')  // vers B3
+console.log('Labyrinthe#matrix:', labyrinthe.matrix)
+
+// A FAIRE: Exo 5 - Ajouter la méthode `getPath` au prototype de Labyrinthe
+//
+//console.log('Labyrinthe#getPath:', labyrinthe.getPath('A1', 'C3'))
+//
+//function LabyrintheHTMLView (labyrinthe) {
+//  this.labyrinthe = labyrinthe
+//}
+//
+//LabyrintheHTMLView.prototype.draw = function () {
+//  // A FAIRE: BONUS (optionnel) - Dessiner le labyrinthe
+//  // retourne la fonction une chaine de caractères représentant du type:
+//  //   '<table class="labyrinthe">...</table>'
+//}
+//
+//var view = new LabyrintheHTMLView(labyrinthe)
+//console.log('LabyrintheHTMLView#draw', view.draw())
