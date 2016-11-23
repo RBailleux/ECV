@@ -167,7 +167,7 @@ labyrinthe.cellOpen('A3', 'right')  // vers B3
 console.log('Labyrinthe#matrix:', labyrinthe.matrix)
 
 Labyrinthe.prototype.getPath = function (source, destination) {
-  var labGraph = new Graph(this.matrix, this.cellIndex())
+  var labGraph = new Graph(this.matrix, this.cellList())
   return labGraph.getPath(source, destination, labGraph.matrix, labGraph.vertexNames, [source])
 }
 
