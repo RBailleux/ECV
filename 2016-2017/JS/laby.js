@@ -120,9 +120,9 @@ function Labyrinthe (width, height) {
 
 Labyrinthe.prototype.cellList = function () {
   var cells = []
-  for (var i = 0; i < this.width; i++) {
-    for (var j = 1; j <= this.height; j++) {
-      cells.push(COLUMN_NAMES[i] + j)
+  for (var i = 1; i <= this.width; i++) {
+    for (var j = 0; j < this.height; j++) {
+      cells.push(COLUMN_NAMES[j] + i)
     }
   }
   return cells
@@ -152,16 +152,6 @@ Labyrinthe.prototype.cellOpen = function (cellName, direction) {
     this.matrix[openX][openY] = 1
     this.matrix[openY][openX] = 1
   }
-}
-
-Labyrinthe.prototype.labCells = function () {
-  var cells = []
-  for (var i = 1; i <= this.width; i++) {
-    for (var j = 0; j < this.height; j++) {
-      cells.push(COLUMN_NAMES[j] + i)
-    }
-  }
-  return cells
 }
 
 labyrinthe.cellOpen('A1', 'bottom') // vers A2
