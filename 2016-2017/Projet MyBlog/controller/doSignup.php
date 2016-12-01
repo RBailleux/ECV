@@ -29,7 +29,7 @@
     $query = 'INSERT INTO `users` (`login`, `email`, `password`) VALUES (\''.my_escape($_POST['login']).'\', \''.my_escape($_POST['mail']).'\', \''.sha1($_POST['password']).'\')';
 
     my_query($query);
-    $message = 'Inscription r&eacute;ssie, bienvenue sur mon blog !';
+    $message = 'Inscription r&eacute;ussie, bienvenue sur mon blog !';
     $template = 'home';
 
   }
