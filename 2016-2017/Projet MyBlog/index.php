@@ -13,7 +13,13 @@ if(!empty($_GET['action'])){
 $template = $action;
 
 //controller
-
+switch($action){
+	case 'signup':
+		require_once('utilit/captcha.php');
+		break;
+	default:
+		break;
+}
 if(file_exists('controller/'.$action.'.php')){
   include('controller/'.$action.'.php');
 }
