@@ -2,16 +2,5 @@
   if(isset($message)){
     echo '<span style="color:green;">'.$message.'</span>';
   }
-  if(isset($_SESSION['user'])){
-    ?>
-    <a href='index.php?action=doLogout'>Logout</a>
-    <?php
-  }
-  else{
-    ?>
-    <a href='index.php?action=signup'>Sign up</a><br>
-    <a href='index.php?action=login'>Login</a>
-    <?php
-  }
     ?>
 <h1>Welcome !</h1>
