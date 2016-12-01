@@ -39,6 +39,33 @@ function show_portfolio(){
 	}
 }
 
+function show_services(){
+	$post = get_page_by_path('services');
+	setup_postdata($post);
+	echo '<div class="block services">'.the_content();
+	echo '<div class="container"><ul class="services__list">';
+	
+	$pageId = $post->ID;
+	$args = array(
+			'post_type' => 'page',
+			'numberposts' => -1, // -1 signifie toutes les sous-pages
+			'post_parent' => $pageId, // numéro de la page parente
+			'orderby' => 'menu_order'
+	);
+	$posts = get_posts($args);
+	foreach ($posts as $post){
+		setup_postdata($post);
+		echo '<li class="services__list__item">';
+		echo '<div class="services__list__item__img">';
+		
+		echo '</div>';
+		echo '<div class="services__list__item__title">'.get_the_title($post).'</div>';
+		echo '<div class="services__list__item__desc">'.the_content().'</div>';
+		echo '</li>';
+	}
+	echo '</ul></div></div>';
+}
+
 
 /*
 
