@@ -13,7 +13,6 @@ echo '<div class="zone">';
     endwhile;
 
 echo '</div>';
-
 get_footer(); ?>
 
 

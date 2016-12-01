@@ -8,7 +8,7 @@ function enqueue_parent_styles() {
 
 
 
-/*
+
 // everywhere except home
 function my_best_posts_on_each_pages_and_single($qty){
  	
@@ -20,9 +20,25 @@ function my_best_posts_on_each_pages_and_single($qty){
  	}
  	
 }
-//  my_best_posts_on_each_pages_and_single(5)
+// my_best_posts_on_each_pages_and_single(5)
 
-*/
+function show_portfolio(){
+	$post = get_page_by_path('portfolio');
+	$pageId = $post->ID;
+	$args = array(
+			'post_type' => 'page',
+			'numberposts' => -1, // -1 signifie toutes les sous-pages
+			'post_parent' => $pageId, // numéro de la page parente
+			'orderby' => 'menu_order'
+	);
+	$posts = get_posts($args);
+	foreach ($posts as $post){
+		setup_postdata($post);
+		echo get_the_title($post);
+		echo the_content();
+	}
+}
+
 
 /*
 
