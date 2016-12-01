@@ -29,7 +29,4 @@ function my_escape($data){
   global $link;
   return mysqli_escape_string($link, $data);
 }
-
-my_mysqli_connect();
-
 ?>
