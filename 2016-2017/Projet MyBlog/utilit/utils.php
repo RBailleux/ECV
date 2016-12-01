@@ -2,7 +2,7 @@
 function my_mysqli_connect ()
 {
    global $link;
-   $link = mysqli_connect('localhost', 'root', 'root', 'blog');
+   $link = mysqli_connect('localhost', 'root', '', 'blog');
 
    if (!$link) {
        die('<br>Erreur de connexion ('.mysqli_connect_errno().') '. mysqli_connect_error());
