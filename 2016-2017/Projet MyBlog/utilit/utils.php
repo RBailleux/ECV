@@ -29,4 +29,13 @@ function my_escape($data){
   global $link;
   return mysqli_escape_string($link, $data);
 }
+
+function randomText($size = 6){
+	$chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','-','$','!','?'];
+	$text = '';
+	for($i = 0; $i<$size; $i++){
+		$text.=$chars[rand(0,count($chars)-1)];
+	}
+	return $text;
+}
 ?>

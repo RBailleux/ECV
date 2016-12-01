@@ -1,5 +1,6 @@
 <h1>Inscription</h1>
 <?php
+$_SESSION['captcha'] = randomText();
   if(isset($errors))
     foreach ($errors as $key => $value) {
       echo '<span style="color:red;"><b>Erreur : </b>'.$key.' : '.$value.'</span><br>';
@@ -10,5 +11,7 @@
   Pass : <input type="password" name="password"><br>
   Pass2 : <input type="password" name="password2"><br>
   Email : <input type="email" name="mail" <?php if(isset($_POST['mail'])){ echo 'value="'.$_POST['mail'].'"'; }?>><br>
+  <img src="utilit/captcha.php"> Recopier le texte de l'image <br>
+  <input type="text" name="captcha">
   <input type="submit" value="Inscription">
 </form>

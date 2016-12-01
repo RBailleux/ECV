@@ -13,6 +13,14 @@
     if(empty($_POST['mail'])){
       $errors['mail'] = 'mail obligatoire';
     }
+    if(empty($_POST['captcha'])){
+    	$errors['captcha'] = 'Vous devez recopier le texte de l\'image';
+    }
+    else{
+    	if($_POST['captcha'] != $_SESSION['captcha']){
+    		$errors['captcha'] = 'Le texte ne correspond pas';
+    	}
+    }
     return $errors;
   }
 
