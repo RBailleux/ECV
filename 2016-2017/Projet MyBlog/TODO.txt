@@ -1,0 +1,45 @@
+Article :
+	- Création :
+		-Titre
+		-Contenu
+		-Catégorie de l'article
+		-Date
+		-Medias
+		-Autoriser les commentaires
+	- Edition
+	- Suppression si :
+		-L'utilisateur est admin ou superadmin
+		-L'utilisateur est l'auteur de l'acticle
+	- Lecture pour les membres connectés :
+		-Afficher l'article
+		-Afficher les commentaires associés à l'article
+		-Afficher la moyenne des notes des commentaires
+		-Proposer des articles de la même catégorie 
+		-Proposer des articles du même auteur
+	
+	
+Commentaire :
+	- Associé à un et un seul article
+	- Créé par un membre
+	- Modifiable et supprimable par :
+		- Admin
+		- Auteur de l'article
+		- Auteur du commentaire
+	- Création :
+		-Contenu
+		-Date
+		-Note de l'article
+		
+Gestion des membres :
+	- Admin ou superadmin peut créer ou modifier un membre
+	- Un membre peut modifier ses informations
+	- Modification :
+		- Adresse mail
+		- Mot de passe
+		- Nom + Prénom
+		- Signature
+	- Un admin ou superadmin peut passer un membre en auteur
+	- Seul le superadmin peut passer un membre en admin
+	- Un membre peut supprimer son compte
+	- Un admin ou un superadmin peut supprimer le compte d'un membre. Un admin ne peut pas supprimer le compte du superadmin
+	- Voir tous les commentaires / articles
