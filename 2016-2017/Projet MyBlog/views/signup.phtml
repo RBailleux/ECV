@@ -1,17 +1,85 @@
-<h1>Inscription</h1>
 <?php
 $_SESSION['captcha'] = randomText();
-  if(isset($errors))
-    foreach ($errors as $key => $value) {
-      echo '<span style="color:red;"><b>Erreur : </b>'.$key.' : '.$value.'</span><br>';
-    }
- ?>
-<form action="index.php?action=doSignup" method="POST">
-  Login : <input type="text" name="login" <?php if(isset($_POST['login'])){ echo 'value="'.$_POST['login'].'"'; }?>><br>
-  Pass : <input type="password" name="password"><br>
-  Pass2 : <input type="password" name="password2"><br>
-  Email : <input type="email" name="mail" <?php if(isset($_POST['mail'])){ echo 'value="'.$_POST['mail'].'"'; }?>><br>
-  <img src="utilit/captcha.php"> Recopier le texte de l'image <br>
-  <input type="text" name="captcha">
-  <input type="submit" value="Inscription">
-</form>
+?>
+
+<div class="container"> 
+	<div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<div class="panel-title">Inscription</div>
+				<div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="?action=login">D&eacute;j&agrave; membre ?</a></div>
+			</div>  
+			<div class="panel-body" >
+				<form id="signupform" class="form-horizontal" role="form" action="index.php?action=doSignup" method="POST">
+					<?php 
+					if(isset($errors)){
+						foreach ($errors as $key => $value){
+						?>
+						<div id="signupalert" class="alert alert-danger">
+						<?php 
+							echo $key.' : '.$value;
+						?>
+						</div>
+						<?php 
+						}
+					}
+					?>
+					<div class="form-group">
+						<label for="email" class="col-md-3 control-label">Email</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="mail" placeholder="Adresse email" <?php if(isset($_POST['mail'])){ echo 'value="'.$_POST['mail'].'"'; }?> required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-md-3 control-label">Identifiant</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="login" placeholder="Identifiant" <?php if(isset($_POST['login'])){ echo 'value="'.$_POST['login'].'"'; }?> required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="firstname" class="col-md-3 control-label">Pr&eacute;nom</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="firstname" placeholder="Pr&eacute;nom" <?php if(isset($_POST['firstname'])){ echo 'value="'.$_POST['firstname'].'"'; }?>>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-md-3 control-label">Nom</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="lastname" placeholder="Nom" <?php if(isset($_POST['lastname'])){ echo 'value="'.$_POST['lastname'].'"'; }?>>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-md-3 control-label">Mot de passe</label>
+						<div class="col-md-9">
+							<input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password2" class="col-md-3 control-label">Retapez votre mot de passe</label>
+						<div class="col-md-9">
+							<input type="password" class="form-control" name="password2" placeholder="Mot de passe" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="captcha" class="col-md-3 control-label">Recopiez le texte de l'image</label>
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-xs-6">
+									<img src="utilit/captcha.php">
+								</div>
+								<div class="col-xs-6">
+									<input type="text" class="form-control" name="captcha" placeholder="Texte" required>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-3 col-md-9">
+							<input type="submit" id="btn-signup" class="btn btn-info" value="M'enregistrer">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div> 
+</div>

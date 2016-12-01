@@ -4,7 +4,9 @@
       <a class="navbar-brand" href="?action=home">Blog swag</a>
     </div>
     <ul class="nav navbar-nav">
-      <li <?php if((isset($_GET['action']) && $_GET['action'] === 'home') || !isset($_GET['action'])){ ?>class="active"<?php }?>><a href="?action=home">Accueil</a></li>
+      <li <?php if((isset($_GET['action']) && $_GET['action'] === 'home') || !isset($_GET['action'])){ ?>class="active"<?php }?>>
+      	<a href="?action=home">Accueil</a>
+      </li>
       <?php 
       if(isset($_SESSION['user'])){
       	?>
@@ -13,8 +15,12 @@
         }
       else{
       	?>
-		<li <?php if(isset($_GET['action']) && $_GET['action'] === 'login'){ ?>class="active"<?php }?>><a href="?action=login">Connexion</a></li> 
-     	<li <?php if(isset($_GET['action']) && $_GET['action'] === 'signup'){ ?>class="active"<?php }?>><a href="?action=signup">Inscription</a></li>
+		<li <?php if(isset($_GET['action']) && $_GET['action'] === 'login'){ ?>class="active"<?php }?>>
+			<a href="?action=login">Connexion</a>
+		</li> 
+     	<li <?php if(isset($_GET['action']) && $_GET['action'] === 'signup'){ ?>class="active"<?php }?>>
+     		<a href="?action=signup">Inscription</a>
+     	</li>
       	<?php 
       }
       ?>
