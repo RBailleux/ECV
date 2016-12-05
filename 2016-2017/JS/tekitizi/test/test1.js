@@ -42,13 +42,16 @@ Tekitizy.prototype.listenToButtons = function () {
 
 Tekitizy.prototype.drawCarroussel = function (id) {
   var carroussel = ''
-
+  var _this = this;
   carroussel += '<div class="tekitizy-carroussel" id=' + id + '></div>'
   // Ajouter les boutons, la figure ..
   this.carroussel = $(carroussel)
   this.carroussel.appendTo($('body'))
-  jQuery(this.carroussel).append('<div class="tekitizy-carroussel-window"></div>')
-  jQuery('.tekitizy-carroussel-window').append('<button class="tekitizy-close-btn"><i class="fa fa-close"></i></button>')
+  jQuery(this.carroussel).append('<div class="tekitizy-carroussel-window"><div class="tekitizy-carroussel-window-left"><button class="tekitizy-nav tekitizy-prev-btn"><i class="fa fa-angle-left"></i></button></div><div class="tekitizy-carroussel-window-center"><div class="tekitizy-window-inner"></div></div><div class="tekitizy-carroussel-window-right"><button class="tekitizy-close-btn"><i class="fa fa-close"></i></button><button class="tekitizy-nav tekitizy-next-btn"><i class="fa fa-angle-right"></i></button></div></div>')
+  setTimeout(function() {
+      jQuery('.tekitizy-window-inner').append('<img class="tekitizy-carroussel-image" src=""/>')
+  }, 1)
+  
 }
 
 Tekitizy.prototype.appendZoomBtn = function (selector) {
@@ -67,7 +70,7 @@ Tekitizy.prototype.appendZoomBtn = function (selector) {
 
 // affiche une image
 Tekitizy.prototype.actionShow = function (url) {
-  //alert(url)
+  jQuery('.tekitizy-carroussel-image').attr('src',url);
   this.carroussel.addClass('tekitizy-carroussel-open')
 }
 
