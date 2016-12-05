@@ -35,6 +35,9 @@ Tekitizy.prototype.listenToButtons = function () {
     // _this -> instance Tekitizy
     _this.actionShow($(this).attr('data-src'))
   })
+  jQuery('.tekitizy-close-btn').on('click',function () {
+	_this.actionClose();  
+  })
 }
 
 Tekitizy.prototype.drawCarroussel = function (id) {
@@ -44,6 +47,8 @@ Tekitizy.prototype.drawCarroussel = function (id) {
   // Ajouter les boutons, la figure ..
   this.carroussel = $(carroussel)
   this.carroussel.appendTo($('body'))
+  jQuery(this.carroussel).append('<div class="tekitizy-carroussel-window"></div>')
+  jQuery('.tekitizy-carroussel-window').append('<button class="tekitizy-close-btn"><i class="fa fa-close"></i></button>')
 }
 
 Tekitizy.prototype.appendZoomBtn = function (selector) {
@@ -62,7 +67,7 @@ Tekitizy.prototype.appendZoomBtn = function (selector) {
 
 // affiche une image
 Tekitizy.prototype.actionShow = function (url) {
-  alert(url)
+  //alert(url)
   this.carroussel.addClass('tekitizy-carroussel-open')
 }
 
@@ -84,6 +89,7 @@ Tekitizy.prototype.actionPause = function () {
 
 Tekitizy.prototype.actionClose = function () {
   this.carroussel.removeClass('tekitizy-carroussel-open')
+  jQuery(this.carroussel).remove('tekitizy-carroussel-window')
 }
 
 // Tekitizy.setup('.post img',{ 'carroussel_id': 'my-tekitizy-carroussel' })
