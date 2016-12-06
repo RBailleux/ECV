@@ -43,6 +43,9 @@ Tekitizy.prototype.listenToButtons = function () {
   jQuery('.tekitizy-next-btn').on('click', function() {
 	  _this.actionNext()
   })
+  jQuery('.tekitizy-prev-btn').on('click', function() {
+	  _this.actionPrev()
+  })
 }
 
 Tekitizy.prototype.drawCarroussel = function (id) {
@@ -98,7 +101,17 @@ Tekitizy.prototype.actionNext = function () {
 }
 
 Tekitizy.prototype.actionPrev = function () {
-
+	var currentPosition
+	currentPosition = jQuery('.tekitizy-carroussel-image').attr('data-position')
+	currentPosition = parseInt(currentPosition)-1
+	nextElement = jQuery('.tekitizy-container').find('i[data-position=' + currentPosition + ']')
+	if(nextElement.length <= 0){
+		currentPosition = jQuery('.tekitizy-container i').length
+		nextElement = jQuery('.tekitizy-container').find('i[data-position=0]')
+	}
+	nextElementSrc = nextElement.attr('data-src')
+	jQuery('.tekitizy-carroussel-image').attr('src', nextElementSrc)
+	jQuery('.tekitizy-carroussel-image').attr('data-position', currentPosition)
 }
 
 Tekitizy.prototype.actionPlay = function () {
