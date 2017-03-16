@@ -29,7 +29,7 @@ function show_portfolio(){
 			'post_type' => 'page',
 			'numberposts' => -1, // -1 signifie toutes les sous-pages
 			'post_parent' => $pageId, // numéro de la page parente
-			'orderby' => 'menu_order'
+
 	);
 	$posts = get_posts($args);
 	foreach ($posts as $post){
