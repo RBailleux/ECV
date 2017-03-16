@@ -1,0 +1,96 @@
+1/ écrire une requête qui affiche toutes les informations de tous les films qui sont dans la table films.
+SELECT * FROM `films`;
+2/ écrire une requête qui affiche l'identifiant, le titre et le résumé de tous les films qui sont dans la table films. 
+SELECT `id_film`,`titre`,`resum` FROM `films`;
+3/ écrire une requête qui affiche le titre, le résumé et la date de début d'affiche de tous les films, les résultats doivent ètre classés par ordre alphabétique du titre.
+SELECT `titre`,`resum`,`date_debut_affiche` FROM `films` ORDER BY `titre`;
+4/ écrire une requête qui affiche l'identifiant, le titre et le résumé des 10 premiers films présents dans la table "films".
+SELECT `id_film`,`titre`,`resum` FROM `films` LIMIT 10
+5/ écrire une requête qui affiche le titre et le résumé des films du genre "adventure".
+SELECT `titre`,`resum` FROM `films` WHERE `id_genre`=10
+6/ écrire une requête qui trouve tous les films qui ont le chiffre 28 dans leur titre et affiche leurs titres respectifs dans une colonne nommée « titre_film », ainsi que leurs résumés respectifs dans une colonne nommée « resum_film »
+SELECT `titre` FROM `films` WHERE `titre` LIKE '%28%'
+7/ écrire une requête qui affiche l'identifiant, le titre et le résumé des films dont l'identifiant est compris dans la liste suivante : 4,8,15,16,23,42
+SELECT `id_film`,`titre`,`resum` FROM `films` WHERE `id_film` IN (4,8,15,16,23,42)
+8/ écrire une requête qui affiche le nombre total de places dans le cinéma dans une colonne nommée "places".
+SELECT sum(`places`) as `places` FROM `salles`
+9/ écrire une requête qui affiche la date de début d'affiche des films qui sont à  l'affiche à  partir du 16 novembre 2011, les résultats doivent ètre ordonnés par identifiants en ordre décroissant, et doivent comprendre une colonne nommée "titre film" contenant le titre précédé de la mention "nouveauté ! ".
+SELECT CONCAT('nouveauté ! ',`titre`) as `titre film` FROM `films` WHERE `date_debut_affiche` >= '2011-11-16' ORDER BY `id_film` DESC
+BONUS:
+10/ écrire une requête qui affiche toutes les informations de le 2eme dizaine des films dont la date de début d'affiche est strictement antérieure au 25 mars 1995, les résultats doivent ètre classés par date de debut d'affiche.
+SELECT * FROM `films` WHERE `date_debut_affiche` < '1995-03-25' ORDER BY `date_debut_affiche` LIMIT 10,10
+11/ écrire une requête qui ne sélectionne que les salles qui ont plus de 100 places, et qui sont comprises entre le 1er et le 3ème étage inclus. Il faudra afficher le numéro de l'étage ('num etage'), le nombre de places dans la salle ('nbr places') et le nom de la salle, les résultats doivent ètre ordonnés par étage (en partant du plus bas), puis par nombre de places (les plus grandes salles d'abord).
+SELECT `etage_salle` AS `num etage`, `places` AS `nbr places`, `nom_salle` FROM `salles` WHERE `places` > 100 AND `etage_salle` BETWEEN 1 AND 3 ORDER BY `etage_salle`, `places` DESC
+
+
+
+
+
+
+
+
+
+
+
+
+1/ écrire une requête qui affiche le nombre de place par étage du cinéma. Les colonnes des résultats devront etre nommées comme suit : 'Etage' et 'Nombre de places' et ordonnées par étage.
+SELECT `etage_salle` AS 'Etage', sum(`places`) AS 'Nombre de places ' FROM `salles` GROUP BY `etage_salle` ORDER BY `etage_salle`
+
+2/ écrire une requête qui affiche les titres de tous les films du genre 'horror'.
+Vous n'avez pas le droit d'utiliser directement un identifiant numérique dans la requête.
+Vous n'avez pas le droit d'écrire une requête mutli-tables.
+Vous n'avez pas le droit d'utiliser de jointure.
+SELECT `titre` FROM `films` WHERE `id_genre`= (SELECT `id_genre` FROM `genres` WHERE `nom`='horror')
+
+3/ écrire une requête qui affiche les titres (dans une colonne nommée 'film') et le genre (dans une colonne nommée 'genre') de tous les films du genre 'western' ou du genre 'war'.
+Vous n'avez pas le droit d'utiliser directement un ou plusieurs identifiant(s) numérique(s) dans la requête.
+Vous n'avez pas le droit d'écrire une requête imbriquée.
+Vous n'avez pas le droit d'utiliser de jointure.
+SELECT films.titre as 'film', genres.nom AS 'genre' FROM films, genres WHERE genres.id_genre = films.id_genre AND (genres.nom='western' OR genres.nom='war')
+-- Pour toutes les requêtes suivantes, les requetes imbriquées et les requetes multi-tables sont interdites --
+4/ écrire une requête qui affiche en majuscule les titres de tous les films, ainsi que le nom du distributeur de chacun des films. Les films dont le distributeur est inconnu ne doivent pas etre inclus dans les resultats.
+SELECT upper(films.titre) as 'Titre', distributeurs.nom as 'Distributeur' FROM films JOIN distributeurs ON distributeurs.id_distributeur = films.id_distributeur
+SELECT upper(films.titre) as 'Titre', distributeurs.nom AS 'Distributeur' FROM films, distributeurs WHERE films.id_distributeur = distributeurs.id_distributeur AND films.id_distributeur IS NOT NULL
+
+
+5/ écrire une requête qui affiche les titres (dans une colonne nommée 'film') et le genre (dans une colonne nommée 'genre') de tous les films.
+SELECT films.titre as 'film', genres.nom as 'genre' FROM films LEFT JOIN genres ON genres.id_genre = films.id_genre
+SELECT films.titre as 'film', genres.nom as 'genre' FROM films, genres WHERE films.id_genre = genres.id_genre
+
+6/ écrire une requête qui affiche les titres (dans une colonne nommée 'film') et le genre (dans une colonne nommée 'genre') de tous les films dont le genre n'est pas précisé.
+SELECT films.titre as 'film', genres.nom as 'genre' FROM films, genres WHERE films.id_genre = genres.id_genre AND genres.nom='unknow'
+SELECT films.titre as 'film', genres.nom as 'genre' FROM films LEFT JOIN genres ON genres.id_genre = films.id_genre AND genres.nom = 'unknow'
+
+7/ écrire une requête qui affiche l'identifiant, le titre, le genre et le distributeur des films dont l'identifiant est compris entre 3540 et 3555.
+SELECT films.id_film, films.titre, genres.nom, distributeurs.nom FROM films INNER JOIN genres ON films.id_genre = genres.id_genre INNER JOIN distributeurs ON films.id_distributeur = distributeurs.id_distributeur WHERE films.id_film BETWEEN 3540 AND 3555
+
+8/ écrire une requête qui affiche le nom, le prénom et l'email du gérant du cinema.
+SELECT personnes.nom, personnes.prenom, personnes.email , fonctions.nom FROM personnes JOIN employes ON personnes.id_personne = employes.id_personne JOIN fonctions ON fonctions.id_fonction = employes.id_fonction AND fonctions.nom = 'gérant
+'
+
+9/ écrire une requête qui modifie l'adresse postale de la ligne de la table personnes qui porte l'id 18 en y assignant la valeur suivante : '22, Avenue de la République'.
+UPDATE personnes SET adresse = '22, Avenue de la République' WHERE id_personne=18
+
+10/ écrire une requête qui insère dans la base de données un nouveau forfait nommé 'Exclusivité MCSI 3' coutant 42 euros et ayant pour 'resum' la valeur suivante 'Réservé aux étudiants de l'ESGI en MCSI 3A/I' valable pendant 1 an.
+INSERT INTO `forfaits` (`nom`, `resum`, `prix`, `duree_jours`) VALUES ('Exclusivité MCSI 3', 'Réservé aux étudiants de l''ESGI en MCSI 3A/I', '42', '365')
+
+11/ écrire une requête qui modifie la ligne de la table personnes portant l'id 83 afin qu'elle comporte vos informations personnelles.
+UPDATE personnes SET adresse = '11 rue du Moutier', cpostal = '78910', date_naissance = '1994-07-07', email='robin.bailleux@gmail.com', nom='bailleux', pays='france', prenom='robin', ville='behoust' WHERE id_personne=83
+
+12/ écrire une requête qui supprime toutes les affectations en tant qu'agent de sécurité de la base de données.
+UPDATE fonctions SET `id_fonction` = NULL WHERE `nom`='agent sécurité'
+
+BONUS:
+13/ écrire une requête qui insère une nouvelle seance pour le film 'Pathfinder' 
+dans la salle 'Martin Scorsese' avec pour ouvreur une hôtesse, comme technicien 
+un projectionniste et pour le menage un agent d'entretien, la seance doit 
+commencer le lundi 5 décembre à 20h00 et finir 45 minutes apres la fin du film, 
+la séance débutera par une plage de publicité et 20 minutes.
+
+
+
+14/ écrire une requête qui affiche le titre du film, le resumé du film, l'année de 
+production du film, le nom de la salle, le nombre de places de la salle, et des 
+colonnes de résultats nommées 'ouvreur', 'technicien' et 'menage' contenant pour chacune 
+le nom et le prénom de l'employé concerné séparés par un espace et l'heure du debut de la 
+seance que vous venez de créer.
